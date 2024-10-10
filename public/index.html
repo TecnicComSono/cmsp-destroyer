@@ -56,28 +56,30 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const ra = document.getElementById('ra').value;
-            const digito = document.getElementById('digito').value;
-            const uf = document.getElementById('uf').value;
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const ra = document.getElementById('ra').value;
+    const digito = document.getElementById('digito').value;
+    const uf = document.getElementById('uf').value;
+    const senha = document.getElementById('senha').value;
 
-            fetch('/api/start-task', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ra, digito, uf }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Tarefas iniciadas com sucesso!');
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error('Erro:', error);
-            });
-        });
+    fetch('/api/start-task', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ra, digito, uf, senha }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Tarefas iniciadas com sucesso!');
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error('Erro:', error);
+    });
+});
+
     </script>
 </body>
 </html>
