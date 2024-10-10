@@ -1,18 +1,13 @@
-const express = require('express');
-const axios = require('axios');
-const app = express();
-
-app.use(express.json());
-
 app.post('/api/start-task', async (req, res) => {
-    const { ra, digito, uf } = req.body;
+    const { ra, digito, uf, senha } = req.body; // Recebe a senha
 
     try {
-        // Faz a requisição de autenticação com as credenciais do usuário
+        // Faz a requisição de autenticação com a senha
         const authResponse = await axios.post('https://api.cmsp.ip.tv/auth', {
             ra,
             digito,
-            uf
+            uf,
+            senha // Envia a senha na autenticação
         });
 
         const authToken = authResponse.data.auth_token;
@@ -33,6 +28,3 @@ app.post('/api/start-task', async (req, res) => {
         res.status(500).json({ message: 'Erro ao iniciar as tarefas.' });
     }
 });
-
-module.exports = app;
-
